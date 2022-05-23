@@ -1,0 +1,19 @@
+name: Docker Build and Push image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_publish_backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry scorpio2002/centos-8-vault-image:8
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: scorpio2002/centos-8-vault-image
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        tags: "8,centos8"
